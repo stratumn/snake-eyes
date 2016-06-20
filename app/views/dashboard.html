@@ -1,0 +1,34 @@
+<div ng-controller="DashboardController as dashboard" flex >
+  <div ng-hide="dashboard.ready" layout="column" layout-align="center">
+    <md-input-container>
+      <label>Game</label>
+      <input type="text" ng-model="dashboard.gameId" required>
+    </md-input-container>
+
+    <md-button class="md-raised" ng-click="dashboard.start()">Start!</md-button>
+  </div>
+
+  <div ng-show="dashboard.ready">
+    <div layout="row" >
+      <md-content id="scores" flex>
+        <h2>Scores</h2>
+        <ul>
+          <li ng-repeat="score in dashboard.scores">
+            {{score.player}}: {{score.dice1}}-{{score.dice2}}
+          </li>
+        </ul>
+      </md-content>
+
+      <md-content id="winners" flex>
+        <h2>Winners</h2>
+        <ul>
+          <li ng-repeat="winner in dashboard.winners">
+            {{winner}}
+          </li>
+        </ul>
+      </md-content>
+
+    </div>
+    <md-button href="#" target="_blank">View chainscript</md-button>
+  </div>
+</div>

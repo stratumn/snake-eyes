@@ -1,0 +1,26 @@
+<div ng-controller="GameController as game" layout="column" flex>
+
+  <md-content layout-padding layout="column" layout-align="center" ng-hide="game.showDice()">
+
+    <md-input-container>
+      <label>Game</label>
+      <input type="text" ng-model="game.gameId" required>
+    </md-input-container>
+
+    <md-input-container>
+      <label>Nick</label>
+      <input type="text" ng-model="game.nick" required md-maxlength="12">
+    </md-input-container>
+
+    <md-button class="md-raised" ng-click="game.play()">Ready!</md-button>
+  </md-content>
+
+  <md-content layout-padding layout="column" layout-align="center" ng-show="game.showDice()">
+    <md-content layout-padding layout="row" layout-align="center">
+      <div>{{game.dice1}}</div>
+      <div>{{game.dice2}}</div>
+    </md-content>
+    <md-button class="md-raised" ng-click="game.throwDice()">Play!</md-button>
+  </md-content>
+
+</div>
