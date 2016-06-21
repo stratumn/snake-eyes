@@ -28,6 +28,10 @@ body, html {
   font-size: 52px;
 }
 
+#results {
+  max-height: 800px;
+}
+
 #scores table {
   width: 100%;
 }

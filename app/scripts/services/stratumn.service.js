@@ -61,8 +61,6 @@ function StratumnService($http, $q, envService) {
     return post(url, player)
       .then(function(res) {
         playerBranchTip[player] = res.meta.linkHash;
-        console.log('User created');
-        console.log(playerBranchTip);
         return res;
       });
   }
@@ -80,8 +78,6 @@ function StratumnService($http, $q, envService) {
   }
 
   function doPlay(score) {
-    console.log('Playing');
-    console.log(playerBranchTip);
     var url = envService.read('agentUrl') + '/links/' + playerBranchTip[score.player] + '/play';
 
     return post(url, [score.dice1, score.dice2])

@@ -16,6 +16,8 @@ module.exports = {
 
     if (this.state.dice1 === 1 && this.state.dice2 === 1) {
       this.meta.tags = ['win'];
+    } else {
+      this.meta.tags = [];
     }
     this.append();
   }

@@ -13,7 +13,7 @@
 
   <div ng-show="dashboard.ready" layout="column" layout-align="center">
     <h2>{{dashboard.gameId}}</h2>
-    <div layout="row" layout-align="center">
+    <div layout="row" layout-align="center" id="results">
       <md-content id="scores" flex>
         <h2>Scores</h2>
         <table>
@@ -24,7 +24,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="score in dashboard.scores">
+            <tr ng-repeat="score in dashboard.scores track by $index">
               <td>{{score.player}}</td>
               <td>
                 <dice value="score.dice1"></dice>
@@ -40,7 +40,7 @@
       <md-content id="winners" flex>
         <h2>Winners</h2>
         <ul>
-          <li ng-repeat="winner in dashboard.winners">
+          <li ng-repeat="winner in dashboard.winners track by $index">
             {{winner}}
           </li>
         </ul>

@@ -24,7 +24,7 @@ function GameService(PeerService, StratumnService) {
       var dice2 = data[2];
       var score = { player: player, dice1: dice1, dice2: dice2 };
       scores.push(score);
-      
+
       if (dice1 === 1 && dice2 === 1) {
         winners.push(player);
       }
