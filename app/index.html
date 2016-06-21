@@ -23,8 +23,9 @@
     <![endif]-->
 
     <div layout-padding>
-      <h1>Snake Eyes</h1>
+      <h1><dice value="1"></dice> <dice value="1"></dice> Snake Eyes</h1>
       <div ng-view=""></div>
+      <div hide show-gt-md ng-include=" 'views/stratumn.html' "></div>
     </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -59,6 +60,7 @@
     <script src="scripts/services/game.service.js"></script>
     <script src="scripts/services/peer.service.js"></script>
     <script src="scripts/services/diceConverter.service.js"></script>
+    <script src="scripts/services/stratumn.service.js"></script>
     <script src="scripts/directives/dice.directive.js"></script>
     <!-- endbuild -->
     <script src="https://use.typekit.net/hum5ldw.js"></script>

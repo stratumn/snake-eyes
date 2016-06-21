@@ -4,7 +4,7 @@ angular
 
 function PeerService() {
 
-  this.API_KEY = '8xttj4szjns46lxr';
+  this.API_KEY = '09s7kebyzt73nmi';
 
   this.peer = null;
 
@@ -28,5 +28,5 @@ function PeerService() {
         cb(data);
       });
     });
-  }
+  };
 }

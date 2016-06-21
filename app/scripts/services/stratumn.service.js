@@ -6,9 +6,14 @@ angular.module('snakeEyesApp')
 StratumnService.$inject = ['$http', '$q', 'envService'];
 
 function StratumnService($http, $q, envService) {
-  var service = this;
+  this.init = init;
+  this.play = play;
+  this.chainscriptUrl = chainscriptUrl;
 
-  var request = function(verb, url, data) {
+  var gameLinkHash, mapId;
+  var playerBranchTip = {};
+
+  function request(verb, url, data) {
     var deferred = $q.defer();
 
     $http[verb](url, data)
@@ -26,24 +31,68 @@ function StratumnService($http, $q, envService) {
         deferred.reject(err);
       });
     return deferred.promise;
-  };
+  }
 
-  var post = function(url, data) {
+  function post(url, data) {
     data = data || {};
     return request('post', url, JSON.stringify(data));
-  };
+  }
 
-  var get = function(url) {
+  function get(url) {
     return request('get', url);
-  };
+  }
 
-  this.init = function(gameId) {
+  function init(gameId) {
     var url = envService.read('agentUrl') + '/maps';
 
     return post(url, gameId)
       .then(function(res) {
-        service.linkHash = res.meta.linkHash;
-        return res.meta.linkHash
+        console.log(res);
+
+        mapId = res.link.meta.mapId;
+        gameLinkHash = res.meta.linkHash;
+        return res;
       });
-  };
+  }
+
+  function createUser(player) {
+    var url = envService.read('agentUrl') + '/links/' + gameLinkHash + '/createUser';
+
+    return post(url, player)
+      .then(function(res) {
+        playerBranchTip[player] = res.meta.linkHash;
+        console.log('User created');
+        console.log(playerBranchTip);
+        return res;
+      });
+  }
+
+  function play(score) {
+
+    if (!playerBranchTip[score.player]) {
+      createUser(score.player)
+        .then(function() {
+          return doPlay(score);
+        });
+    } else {
+      return doPlay(score);
+    }
+  }
+
+  function doPlay(score) {
+    console.log('Playing');
+    console.log(playerBranchTip);
+    var url = envService.read('agentUrl') + '/links/' + playerBranchTip[score.player] + '/play';
+
+    return post(url, [score.dice1, score.dice2])
+      .then(function(res) {
+        playerBranchTip[score.player] = res.meta.linkHash;
+        return res;
+      });
+
+  }
+
+  function chainscriptUrl() {
+    return envService.read('agentUrl') + '/maps/' + mapId;
+  }
 }

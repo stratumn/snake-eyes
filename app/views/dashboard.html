@@ -1,15 +1,19 @@
 <div ng-controller="DashboardController as dashboard" flex >
-  <div ng-hide="dashboard.ready" layout="column" layout-align="center">
-    <md-input-container>
-      <label>Game</label>
-      <input type="text" ng-model="dashboard.gameId" required>
-    </md-input-container>
+  <h1>Dashboard</h1>
+  <div ng-hide="dashboard.ready">
+    <md-content layout="column" layout-align="center">
+      <md-input-container>
+        <label>Game</label>
+        <input type="text" ng-model="dashboard.gameId" required>
+      </md-input-container>
 
-    <md-button class="md-raised" ng-click="dashboard.start()">Start!</md-button>
+      <md-button class="md-raised" ng-click="dashboard.start()">Start!</md-button>
+    </md-content>
   </div>
 
-  <div ng-show="dashboard.ready">
-    <div layout="row" >
+  <div ng-show="dashboard.ready" layout="column" layout-align="center">
+    <h2>{{dashboard.gameId}}</h2>
+    <div layout="row" layout-align="center">
       <md-content id="scores" flex>
         <h2>Scores</h2>
         <table>
@@ -43,6 +47,6 @@
       </md-content>
 
     </div>
-    <md-button href="#" target="_blank">View chainscript</md-button>
+    <md-button href="{{dashboard.chainscriptUrl()}}" target="_blank">View chainscript</md-button>
   </div>
 </div>

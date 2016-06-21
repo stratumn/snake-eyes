@@ -27,7 +27,7 @@ function GameController($routeParams, GameService) {
   }
 
   function showDice() {
-    return vm.gameId && vm.nick && vm.ready
+    return vm.gameId && vm.nick && vm.ready;
   }
 
   function throwDie() {

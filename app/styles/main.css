@@ -16,6 +16,12 @@ button, select, html, textarea, input {
 body, html {
   background-color: #2278CF;
   color: white;
+  height: 100%;
+}
+
+.container{
+  min-height: 80%;
+  margin-bottom: -60px;
 }
 
 #game i[class*="ico-dice-"] {
@@ -24,4 +30,29 @@ body, html {
 
 #scores table {
   width: 100%;
+}
+
+#stratumn .logo {
+  float: left;
+  margin-right: 10px;
+  margin-top: 4px;
+}
+
+#stratumn {
+  color: #8DBFF2;
+  position: fixed;
+  bottom: 20px;
+  width: 200px;
+}
+
+#stratumn  h6 {
+  font-size: 15px;
+  text-transform: uppercase;
+  margin: 8px 0 0 0;
+}
+
+#stratumn h5 {
+  margin-top: 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }

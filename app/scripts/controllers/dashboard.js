@@ -3,17 +3,19 @@
 angular.module('snakeEyesApp')
   .controller('DashboardController', DashboardController);
 
-DashboardController.$inject = ['$scope', 'GameService'];
+DashboardController.$inject = ['$scope', 'GameService', 'StratumnService'];
 
-function DashboardController($scope, GameService) {
+function DashboardController($scope, GameService, StratumnService) {
   var vm = this;
 
   vm.start = start;
   vm.scores = [];
   vm.winners = [];
+  vm.chainscriptUrl = StratumnService.chainscriptUrl;
 
   function start() {
     GameService.startGame(vm.gameId);
+    StratumnService.init(vm.gameId);
     GameService.listen(vm.scores, vm.winners, cb);
     vm.ready = true;
   }

@@ -4,9 +4,9 @@ angular
   .module('snakeEyesApp')
   .service('GameService', GameService);
 
-GameService.$inject = ['PeerService'];
+GameService.$inject = ['PeerService', 'StratumnService'];
 
-function GameService(PeerService) {
+function GameService(PeerService, StratumnService) {
 
   this.startGame = function(nick, gameId) {
     this.nick = nick;
@@ -24,14 +24,13 @@ function GameService(PeerService) {
       var dice2 = data[2];
       var score = { player: player, dice1: dice1, dice2: dice2 };
       scores.push(score);
-      console.log(data);
-      console.log(score);
-
-      if (dice1 == 1 && dice2 == 1) {
+      
+      if (dice1 === 1 && dice2 === 1) {
         winners.push(player);
       }
 
+      StratumnService.play(score);
       cb();
-    })
-  }
+    });
+  };
 }

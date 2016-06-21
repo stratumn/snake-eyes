@@ -18,7 +18,7 @@ angular
   ])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/:gameId?', {
+      .when('/', {
         templateUrl: 'views/game.html',
         controller: 'GameController',
         controllerAs: 'game'

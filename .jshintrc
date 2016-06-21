@@ -54,6 +54,7 @@
 
   "globals": {
     "angular": false,
-    "$": false
+    "$": false,
+    "Peer": false
   }
 }
