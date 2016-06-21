@@ -6,6 +6,8 @@ function PeerService() {
 
   this.API_KEY = '8xttj4szjns46lxr';
 
+  this.peer = null;
+
   this.connect = function(id, peerId) {
     this.peer = new Peer(id, {key: this.API_KEY});
     console.log('Connected as ' + id + '.');

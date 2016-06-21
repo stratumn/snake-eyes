@@ -8,3 +8,20 @@
 #scores, #winners {
   text-align: center;
 }
+
+button, select, html, textarea, input {
+  font-family: Gibson-Regular, Calibri, Trebuchet, sans-serif;
+}
+
+body, html {
+  background-color: #2278CF;
+  color: white;
+}
+
+#game i[class*="ico-dice-"] {
+  font-size: 52px;
+}
+
+#scores table {
+  width: 100%;
+}

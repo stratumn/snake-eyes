@@ -13,7 +13,8 @@ angular
     'ngAnimate',
     'ngRoute',
     'ngSanitize',
-    'ngMaterial'
+    'ngMaterial',
+    'environment'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -30,4 +31,24 @@ angular
       .otherwise({
         redirectTo: '/'
       });
+  })
+  .config(function(envServiceProvider) {
+    // set the domains and variables for each environment
+    envServiceProvider.config({
+      domains: {
+        development: ['localhost:9000'],
+        production: ['snake-eyes.stratumn.com']
+      },
+      vars: {
+        development: {
+          agentUrl: 'http://snake-eyes.lvh.me:3001'
+        },
+        production: {
+          agentUrl: 'https://snake-eyes.stratumn.net'
+        }
+      }
+    });
+    // run the environment check, so the comprobation is made
+    // before controllers and services are built
+    envServiceProvider.check();
   });

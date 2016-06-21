@@ -1,3 +1,5 @@
+'use strict';
+
 angular
   .module('snakeEyesApp')
   .service('GameService', GameService);
@@ -17,10 +19,13 @@ function GameService(PeerService) {
 
   this.listen = function(scores, winners, cb) {
     PeerService.receive(function(data) {
-      player = data[0];
-      dice1 = data[1];
-      dice2 = data[2];
-      scores.push({ player: player, dice1: dice1, dice2: dice2 });
+      var player = data[0];
+      var dice1 = data[1];
+      var dice2 = data[2];
+      var score = { player: player, dice1: dice1, dice2: dice2 };
+      scores.push(score);
+      console.log(data);
+      console.log(score);
 
       if (dice1 == 1 && dice2 == 1) {
         winners.push(player);

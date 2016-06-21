@@ -1,7 +1,6 @@
-<div ng-controller="GameController as game" layout="column" flex>
+<div id="game" ng-controller="GameController as game" layout="column" flex>
 
   <md-content layout-padding layout="column" layout-align="center" ng-hide="game.showDice()">
-
     <md-input-container>
       <label>Game</label>
       <input type="text" ng-model="game.gameId" required>
@@ -16,9 +15,15 @@
   </md-content>
 
   <md-content layout-padding layout="column" layout-align="center" ng-show="game.showDice()">
+    <h1>Playing on {{game.gameId}}!</h1>
+    <h2>(as {{game.nick}})</h2>
     <md-content layout-padding layout="row" layout-align="center">
-      <div>{{game.dice1}}</div>
-      <div>{{game.dice2}}</div>
+      <div>
+        <dice value="game.dice1"></dice>
+      </div>
+      <div>
+        <dice value="game.dice2"></dice>
+      </div>
     </md-content>
     <md-button class="md-raised" ng-click="game.throwDice()">Play!</md-button>
   </md-content>

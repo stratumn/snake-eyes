@@ -12,10 +12,24 @@
     <div layout="row" >
       <md-content id="scores" flex>
         <h2>Scores</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>Result</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="score in dashboard.scores">
+              <td>{{score.player}}</td>
+              <td>
+                <dice value="score.dice1"></dice>
+                <dice value="score.dice2"></dice>
+              </td>
+            </tr>
+          </tbody>
+        </table>
         <ul>
-          <li ng-repeat="score in dashboard.scores">
-            {{score.player}}: {{score.dice1}}-{{score.dice2}}
-          </li>
         </ul>
       </md-content>
 
