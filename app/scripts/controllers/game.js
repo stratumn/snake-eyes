@@ -9,14 +9,16 @@ function GameController($routeParams, GameService) {
   var vm = this;
 
   vm.gameId = $routeParams.gameId;
-  vm.throwDice = throwDice;
+  vm.rollDice = rollDice;
   vm.play = play;
   vm.showDice = showDice;
+  vm.remainingRolls = 10;
 
-  function throwDice() {
-    vm.dice1 = throwDie();
-    vm.dice2 = throwDie();
+  function rollDice() {
+    vm.dice1 = rollDie();
+    vm.dice2 = rollDie();
     GameService.play(vm.dice1, vm.dice2);
+    vm.remainingRolls--;
   }
 
   function play() {
@@ -30,7 +32,7 @@ function GameController($routeParams, GameService) {
     return vm.gameId && vm.nick && vm.ready;
   }
 
-  function throwDie() {
+  function rollDie() {
     return Math.ceil(Math.random() * 6);
   }
 }

@@ -17,6 +17,13 @@
   <md-content layout-padding layout="column" layout-align="center" ng-show="game.showDice()">
     <h1>Playing on {{game.gameId}}!</h1>
     <h2>(as {{game.nick}})</h2>
+    <p>
+      <ng-pluralize count="game.remainingRolls"
+                    when="{'0': 'No more rolls.',
+                     'one': '1 remaining roll.',
+                     'other': '{} remaining rolls.'}">
+      </ng-pluralize>
+    </p>
     <md-content layout-padding layout="row" layout-align="center">
       <div>
         <dice value="game.dice1"></dice>
@@ -25,7 +32,6 @@
         <dice value="game.dice2"></dice>
       </div>
     </md-content>
-    <md-button class="md-raised" ng-click="game.throwDice()">Play!</md-button>
+    <md-button class="md-raised" ng-click="game.rollDice()" ng-disabled="game.remainingRolls <= 0">Roll!</md-button>
   </md-content>
-
 </div>
