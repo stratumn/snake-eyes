@@ -3,11 +3,12 @@
 angular.module('snakeEyesApp')
   .controller('GameController', GameController);
 
-GameController.$inject = ['GameService'];
+GameController.$inject = ['$routeParams', 'GameService'];
 
-function GameController(GameService) {
+function GameController($routeParams, GameService) {
   var vm = this;
 
+  vm.gameId = $routeParams.gameId;
   vm.throwDice = throwDice;
   vm.play = play;
   vm.showDice = showDice;
@@ -19,8 +20,10 @@ function GameController(GameService) {
   }
 
   function play() {
-    GameService.startGame(vm.nick, vm.gameId);
-    vm.ready = true;
+    if (vm.nick && vm.gameId) {
+      GameService.startGame(vm.nick, vm.gameId);
+      vm.ready = true;
+    }
   }
 
   function showDice() {
