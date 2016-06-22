@@ -55,6 +55,7 @@
   "globals": {
     "angular": false,
     "$": false,
-    "Peer": false
+    "firebase": false,
+    "d3": false
   }
 }

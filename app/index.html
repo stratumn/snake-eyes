@@ -13,8 +13,8 @@
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/map.css">
     <!-- endbuild -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/525icons/2.5.0/525icons.min.css">
   </head>
   <body ng-app="snakeEyesApp">
@@ -39,6 +39,7 @@
        ga('send', 'pageview');
     </script>
 
+
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/angular/angular.js"></script>
@@ -48,8 +49,11 @@
     <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-messages/angular-messages.js"></script>
     <script src="bower_components/angular-material/angular-material.js"></script>
-    <script src="bower_components/peerjs/peer.js"></script>
+    <script src="bower_components/firebase/firebase.js"></script>
     <script src="bower_components/angular-environment/dist/angular-environment.js"></script>
+    <script src="bower_components/d3/d3.js"></script>
+    <script src="bower_components/bitcore-lib/bitcore-lib.min.js"></script>
+    <script src="bower_components/bitcore-message/bitcore-message.min.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -57,11 +61,13 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/dashboard.js"></script>
     <script src="scripts/controllers/game.js"></script>
+    <script src="scripts/controllers/map.js"></script>
     <script src="scripts/services/game.service.js"></script>
-    <script src="scripts/services/peer.service.js"></script>
+    <script src="scripts/services/firebase.service.js"></script>
     <script src="scripts/services/diceConverter.service.js"></script>
     <script src="scripts/services/stratumn.service.js"></script>
     <script src="scripts/directives/dice.directive.js"></script>
+    <script src="scripts/directives/mapExplorer.directive.js"></script>
     <!-- endbuild -->
     <script src="https://use.typekit.net/hum5ldw.js"></script>
     <script>try{Typekit.load({ async: true });}catch(e){}</script>

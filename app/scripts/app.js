@@ -28,6 +28,11 @@ angular
         controller: 'DashboardController',
         controllerAs: 'dashboard'
       })
+      .when('/map', {
+        templateUrl: 'views/map.html',
+        controller: 'MapController',
+        controllerAs: 'map'
+      })
       .otherwise({
         redirectTo: '/'
       });

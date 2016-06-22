@@ -24,7 +24,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="score in dashboard.scores track by $index">
+            <tr ng-repeat="score in dashboard.scores.slice().reverse() | limitTo:20 track by $index">
               <td>{{score.player}}</td>
               <td>
                 <dice value="score.dice1"></dice>
@@ -33,20 +33,30 @@
             </tr>
           </tbody>
         </table>
-        <ul>
-        </ul>
       </md-content>
 
       <md-content id="winners" flex>
         <h2>Winners</h2>
-        <ul>
-          <li ng-repeat="winner in dashboard.winners track by $index">
-            {{winner}}
-          </li>
-        </ul>
+        <table>
+          <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Player</th>
+            <th>Rolls</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="winner in dashboard.winners | orderBy: 'rolls'">
+            <td>{{$index + 1}}</td>
+            <td>{{winner.player}}</td>
+            <td>{{winner.rolls}}</td>
+          </tr>
+          </tbody>
+        </table>
       </md-content>
 
     </div>
     <md-button href="{{dashboard.chainscriptUrl()}}" target="_blank">View chainscript</md-button>
+    <map-explorer map-url="dashboard.chainscriptUrl()" refresh="dashboard.scores.length"></map-explorer>
   </div>
 </div>

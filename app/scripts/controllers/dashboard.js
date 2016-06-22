@@ -15,7 +15,6 @@ function DashboardController($scope, GameService, StratumnService) {
 
   function start() {
     GameService.startGame(vm.gameId);
-    StratumnService.init(vm.gameId);
     GameService.listen(vm.scores, vm.winners, cb);
     vm.ready = true;
   }

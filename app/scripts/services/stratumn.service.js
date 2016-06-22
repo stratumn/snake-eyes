@@ -7,11 +7,11 @@ StratumnService.$inject = ['$http', '$q', 'envService'];
 
 function StratumnService($http, $q, envService) {
   this.init = init;
-  this.play = play;
+  this.register = register;
+  this.roll = roll;
   this.chainscriptUrl = chainscriptUrl;
 
-  var gameLinkHash, mapId;
-  var playerBranchTip = {};
+  var mapId, playerBranchTip;
 
   function request(verb, url, data) {
     var deferred = $q.defer();
@@ -50,45 +50,40 @@ function StratumnService($http, $q, envService) {
         console.log(res);
 
         mapId = res.link.meta.mapId;
-        gameLinkHash = res.meta.linkHash;
         return res;
       });
   }
 
-  function createUser(player) {
-    var url = envService.read('agentUrl') + '/links/' + gameLinkHash + '/createUser';
+  function register(player, gameLinkHash) {
+    var url = envService.read('agentUrl') + '/links/' + gameLinkHash + '/register';
 
-    return post(url, player)
+    return post(url, [player.nick, player.address])
       .then(function(res) {
-        playerBranchTip[player] = res.meta.linkHash;
+        playerBranchTip = res.meta.linkHash;
         return res;
       });
   }
 
-  function play(score) {
-
-    if (!playerBranchTip[score.player]) {
-      createUser(score.player)
-        .then(function() {
-          return doPlay(score);
-        });
-    } else {
-      return doPlay(score);
+  function roll(message, signature) {
+    if (!playerBranchTip) {
+      throw 'User is not registered';
     }
+
+    var url = envService.read('agentUrl') + '/links/' + playerBranchTip + '/roll';
+
+    return post(url, [message, signature])
+      .then(function(res) {
+        playerBranchTip = res.meta.linkHash;
+        return res.link.state;
+      });
   }
 
-  function doPlay(score) {
-    var url = envService.read('agentUrl') + '/links/' + playerBranchTip[score.player] + '/play';
-
-    return post(url, [score.dice1, score.dice2])
-      .then(function(res) {
-        playerBranchTip[score.player] = res.meta.linkHash;
-        return res;
-      });
-
+  function doRoll(message, signature) {
   }
 
   function chainscriptUrl() {
-    return envService.read('agentUrl') + '/maps/' + mapId;
+    if (mapId) {
+      return envService.read('agentUrl') + '/maps/' + mapId;
+    }
   }
 }

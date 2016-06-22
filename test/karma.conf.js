@@ -27,8 +27,11 @@ module.exports = function(config) {
       'bower_components/angular-aria/angular-aria.js',
       'bower_components/angular-messages/angular-messages.js',
       'bower_components/angular-material/angular-material.js',
-      'bower_components/peerjs/peer.js',
+      'bower_components/firebase/firebase.js',
       'bower_components/angular-environment/dist/angular-environment.js',
+      'bower_components/d3/d3.js',
+      'bower_components/bitcore-lib/bitcore-lib.min.js',
+      'bower_components/bitcore-message/bitcore-message.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',
