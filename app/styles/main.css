@@ -61,4 +61,6 @@ body, html {
   text-transform: uppercase;
 }
 
-
+md-toast.md-error-theme .md-toast-content {
+  background-color: red;
+}

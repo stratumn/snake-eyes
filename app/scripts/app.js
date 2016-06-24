@@ -37,6 +37,9 @@ angular
         redirectTo: '/'
       });
   })
+  .config(function($mdThemingProvider) {
+    $mdThemingProvider.theme('error');
+  })
   .config(function(envServiceProvider) {
     // set the domains and variables for each environment
     envServiceProvider.config({

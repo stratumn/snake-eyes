@@ -7,9 +7,9 @@ angular
 var Message = require('bitcore-message');
 var Bitcore  = require('bitcore-lib');
 
-GameService.$inject = ['FirebaseService', 'StratumnService'];
+GameService.$inject = ['$mdToast', 'FirebaseService', 'StratumnService'];
 
-function GameService(FirebaseService, StratumnService) {
+function GameService($mdToast, FirebaseService, StratumnService) {
 
   var nick, privateKey, gameId;
 
@@ -39,11 +39,15 @@ function GameService(FirebaseService, StratumnService) {
 
     return FirebaseService.getGameInfo(gameId)
       .then(function(game) {
-        return StratumnService.register(
-          {
-            nick: nick,
-            address: privateKey.toAddress().toString()
-          }, game.gameLinkHash);
+        if (game) {
+          return StratumnService.register(
+            {
+              nick: nick,
+              address: privateKey.toAddress().toString()
+            }, game.gameLinkHash);
+        } else {
+          $mdToast.show($mdToast.simple().textContent('Game ' + gameId + ' not found.').theme("error"));
+        }
       });
   };
 

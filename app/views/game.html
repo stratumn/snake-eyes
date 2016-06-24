@@ -32,6 +32,6 @@
         <dice value="game.dice2"></dice>
       </div>
     </md-content>
-    <md-button class="md-raised" ng-click="game.rollDice()" ng-disabled="game.dice1 == 1 && game.dice2 == 1">Roll!</md-button>
+    <md-button class="md-raised" ng-click="game.rollDice()" ng-disabled="game.isDisabled()">Roll!</md-button>
   </md-content>
 </div>
