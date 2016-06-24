@@ -42,7 +42,7 @@ angular
     envServiceProvider.config({
       domains: {
         development: ['localhost:9000'],
-        production: ['snakeeyes.stratumn.com']
+        production: ['snakeeyes.stratumn.com', 'snakeeyes.stratumn.com.s3-eu-west-1.amazonaws.com']
       },
       vars: {
         development: {

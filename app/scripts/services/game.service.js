@@ -16,9 +16,19 @@ function GameService(FirebaseService, StratumnService) {
   this.startGame = function(newGameId) {
     gameId = newGameId;
 
-    return StratumnService.init(gameId)
-      .then(function(res) {
-        FirebaseService.setGameLinkHash(gameId, res.meta.linkHash);
+    return FirebaseService.getGameInfo(gameId)
+      .then(function(game) {
+        if (game) {
+          StratumnService.mapId = game.mapId;
+        } else {
+          return StratumnService.init(gameId)
+            .then(function(res) {
+              FirebaseService.setGameInfo(gameId, {
+                gameLinkHash: res.meta.linkHash,
+                mapId: res.link.meta.mapId
+              });
+            });
+        }
       });
   };
 
@@ -27,13 +37,13 @@ function GameService(FirebaseService, StratumnService) {
     nick = newNick;
     privateKey = new Bitcore.PrivateKey();
 
-    return FirebaseService.getGameLinkHash(gameId)
-      .then(function(gameLinkHash) {
+    return FirebaseService.getGameInfo(gameId)
+      .then(function(game) {
         return StratumnService.register(
           {
             nick: nick,
             address: privateKey.toAddress().toString()
-          }, gameLinkHash);
+          }, game.gameLinkHash);
       });
   };
 

@@ -6,8 +6,8 @@ FirebaseService.$inject = ['$q'];
 
 function FirebaseService($q) {
 
-  this.getGameLinkHash = getGameLinkHash;
-  this.setGameLinkHash = setGameLinkHash;
+  this.getGameInfo = getGameInfo;
+  this.setGameInfo = setGameInfo;
   this.listenToScores = listenToScores;
 
   var mapId;
@@ -21,21 +21,18 @@ function FirebaseService($q) {
 
   firebase.initializeApp(config);
 
-  function getGameLinkHash(gameId) {
+  function getGameInfo(gameId) {
     var deferred = $q.defer();
 
-    firebase.database().ref('games/' + gameId + '/linkHash').on('value', function(snapshot) {
-      mapId = snapshot.val();
-      deferred.resolve(mapId);
+    firebase.database().ref('games/' + gameId).on('value', function(snapshot) {
+      deferred.resolve(snapshot.val());
     });
 
     return deferred.promise;
   }
 
-  function setGameLinkHash(gameId, hash) {
-    return firebase.database().ref('/games/' + gameId).set({
-      linkHash: hash
-    });
+  function setGameInfo(gameId, game) {
+    return firebase.database().ref('/games/' + gameId).set(game);
   }
 
   function listenToScores(gameId, cb) {

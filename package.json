@@ -39,6 +39,6 @@
   },
   "scripts": {
     "test": "karma start test/karma.conf.js",
-    "publish": "aws s3 sync app s3://snakeeyes.stratumn.com --region 'eu-west-1' --exclude '.git/*' --exclude '*.DS_Store' --delete"
+    "publish": "aws s3 sync dist s3://snakeeyes.stratumn.com --region 'eu-west-1' --exclude '.git/*' --exclude '*.DS_Store' --delete"
   }
 }

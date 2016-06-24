@@ -10,8 +10,11 @@ function StratumnService($http, $q, envService) {
   this.register = register;
   this.roll = roll;
   this.chainscriptUrl = chainscriptUrl;
+  this.mapId = null;
 
-  var mapId, playerBranchTip;
+  var service = this;
+
+  var playerBranchTip;
 
   function request(verb, url, data) {
     var deferred = $q.defer();
@@ -47,9 +50,7 @@ function StratumnService($http, $q, envService) {
 
     return post(url, gameId)
       .then(function(res) {
-        console.log(res);
-
-        mapId = res.link.meta.mapId;
+        service.mapId = res.link.meta.mapId;
         return res;
       });
   }
@@ -82,8 +83,8 @@ function StratumnService($http, $q, envService) {
   }
 
   function chainscriptUrl() {
-    if (mapId) {
-      return envService.read('agentUrl') + '/maps/' + mapId;
+    if (service.mapId) {
+      return envService.read('agentUrl') + '/maps/' + service.mapId;
     }
   }
 }
