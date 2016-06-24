@@ -5,10 +5,10 @@ const Message = require('bitcore-message');
 const Firebase = require('firebase');
 
 const config = {
-  apiKey: "AIzaSyCjUBHCRE65NGvsfKLkq056qBukSh-r1_Y",
-  authDomain: "snake-eyes-af2d1.firebaseapp.com",
-  databaseURL: "https://snake-eyes-af2d1.firebaseio.com",
-  storageBucket: "snake-eyes-af2d1.appspot.com",
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.FIREBASE_DB_URL,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET
 };
 
 var firebase = new Firebase(config.databaseURL);
