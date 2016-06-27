@@ -56,6 +56,7 @@
     "angular": false,
     "$": false,
     "firebase": false,
-    "d3": false
+    "d3": false,
+    "StratumnSDK": false
   }
 }

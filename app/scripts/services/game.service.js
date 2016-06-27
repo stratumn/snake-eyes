@@ -46,14 +46,14 @@ function GameService($mdToast, FirebaseService, StratumnService) {
               address: privateKey.toAddress().toString()
             }, game.gameLinkHash);
         } else {
-          $mdToast.show($mdToast.simple().textContent('Game ' + gameId + ' not found.').theme("error"));
+          $mdToast.show($mdToast.simple().textContent('Game ' + gameId + ' not found.').theme('error'));
         }
       });
   };
 
   this.roll = function() {
 
-    var message = new Message(new Date().getMilliseconds() + "");
+    var message = new Message(Date.now() + '');
     var signature = message.sign(privateKey);
 
     return StratumnService.roll(message.message, signature);

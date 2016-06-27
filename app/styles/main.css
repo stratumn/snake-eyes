@@ -64,3 +64,18 @@ body, html {
 md-toast.md-error-theme .md-toast-content {
   background-color: red;
 }
+
+md-dialog.md-splash-theme {
+  background-color: transparent;
+  box-shadow: none;
+  overflow: visible;
+}
+
+md-dialog.md-splash-theme md-dialog-content {
+  overflow: visible;
+}
+
+a.md-button.md-splash-theme.md-primary, .md-button.md-splash-theme.md-primary {
+  color: white;
+
+}

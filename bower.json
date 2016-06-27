@@ -11,7 +11,8 @@
     "angular-environment": "^1.0.3",
     "d3": "3.5.17",
     "bitcore-lib": "^0.13.16",
-    "bitcore-message": "^1.0.2"
+    "bitcore-message": "^1.0.2",
+    "stratumn-sdk": "^0.4.0"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"

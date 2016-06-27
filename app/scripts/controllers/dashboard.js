@@ -14,7 +14,7 @@ function DashboardController($scope, GameService, StratumnService) {
   vm.chainscriptUrl = StratumnService.chainscriptUrl;
 
   function start() {
-    GameService.startGame(vm.gameId);
+    GameService.startGame(vm.gameId.toLowerCase());
     GameService.listen(vm.scores, vm.winners, cb);
     vm.ready = true;
   }

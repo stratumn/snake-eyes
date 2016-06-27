@@ -3,9 +3,9 @@
 angular.module('snakeEyesApp')
   .controller('GameController', GameController);
 
-GameController.$inject = ['$routeParams', 'GameService'];
+GameController.$inject = ['$routeParams', '$scope', '$mdDialog', 'GameService'];
 
-function GameController($routeParams, GameService) {
+function GameController($routeParams, $scope, $mdDialog, GameService) {
   var vm = this;
 
   vm.gameId = $routeParams.gameId;
@@ -22,17 +22,22 @@ function GameController($routeParams, GameService) {
       vm.dice2 = res.dice2;
       vm.rolls = res.rolls;
       vm.disabled = false;
+      $scope.$apply();
+
+      if (hasWon()) {
+        showWinningDialog();
+      }
     });
   }
 
   function play() {
     if (vm.nick && vm.gameId) {
-      GameService.register(vm.gameId, vm.nick)
+      GameService.register(vm.gameId.toLowerCase(), vm.nick)
         .then(function(game) {
           if (game) {
             vm.ready = true;
           }
-        })
+        });
     }
   }
 
@@ -41,8 +46,24 @@ function GameController($routeParams, GameService) {
   }
 
   function isDisabled() {
-    return vm.disabled || (vm.dice1 == 1 && vm.dice2 == 1)
+    return vm.disabled || hasWon();
+  }
 
+  function hasWon() {
+    return vm.dice1 === 1 && vm.dice2 === 1;
+  }
+
+  function showWinningDialog() {
+    alert = $mdDialog.alert()
+      .title('You won after ' + vm.rolls + ' rolls!')
+      .htmlContent('<img src="/images/Winner.png">')
+      .ok('Close')
+      .theme('splash');
+    $mdDialog
+      .show(alert)
+      .finally(function() {
+        alert = undefined;
+      });
   }
 }
 

@@ -3,52 +3,33 @@
 angular.module('snakeEyesApp')
   .service('StratumnService', StratumnService);
 
-StratumnService.$inject = ['$http', '$q', 'envService'];
+StratumnService.$inject = ['envService'];
 
-function StratumnService($http, $q, envService) {
+function StratumnService(envService) {
   this.init = init;
   this.register = register;
   this.roll = roll;
   this.chainscriptUrl = chainscriptUrl;
   this.mapId = null;
 
+  StratumnSDK.config.applicationUrl = envService.read('agentUrl');
+
+  var app = StratumnSDK.getApplication('snake-eyes');
+
+  var appUrl;
+   app.then(function(app) {
+     appUrl = app.url;
+   });
+
   var service = this;
 
   var playerBranchTip;
 
-  function request(verb, url, data) {
-    var deferred = $q.defer();
-
-    $http[verb](url, data)
-      .success(function(res) {
-        if (res.meta && res.meta.errorMessage) {
-          var msg = res.meta.errorMessage;
-          console.log(msg);
-          deferred.reject(msg);
-        }
-        else {
-          deferred.resolve(res);
-        }
-      })
-      .error(function(err) {
-        deferred.reject(err);
-      });
-    return deferred.promise;
-  }
-
-  function post(url, data) {
-    data = data || {};
-    return request('post', url, JSON.stringify(data));
-  }
-
-  function get(url) {
-    return request('get', url);
-  }
-
   function init(gameId) {
-    var url = envService.read('agentUrl') + '/maps';
-
-    return post(url, gameId)
+    return app
+      .then(function(app) {
+        return app.createMap(gameId);
+      })
       .then(function(res) {
         service.mapId = res.link.meta.mapId;
         return res;
@@ -56,11 +37,15 @@ function StratumnService($http, $q, envService) {
   }
 
   function register(player, gameLinkHash) {
-    var url = envService.read('agentUrl') + '/links/' + gameLinkHash + '/register';
-
-    return post(url, [player.nick, player.address])
+    return app
+      .then(function(app) {
+        return app.getLink(gameLinkHash);
+      })
+      .then(function(app) {
+        return app.register(player.nick, player.address);
+      })
       .then(function(res) {
-        playerBranchTip = res.meta.linkHash;
+        playerBranchTip = res;
         return res;
       });
   }
@@ -70,21 +55,16 @@ function StratumnService($http, $q, envService) {
       throw 'User is not registered';
     }
 
-    var url = envService.read('agentUrl') + '/links/' + playerBranchTip + '/roll';
-
-    return post(url, [message, signature])
+    return playerBranchTip.roll(message, signature)
       .then(function(res) {
-        playerBranchTip = res.meta.linkHash;
+        playerBranchTip = res;
         return res.link.state;
       });
   }
 
-  function doRoll(message, signature) {
-  }
-
   function chainscriptUrl() {
     if (service.mapId) {
-      return envService.read('agentUrl') + '/maps/' + service.mapId;
+      return appUrl + '/maps/' + service.mapId;
     }
   }
 }

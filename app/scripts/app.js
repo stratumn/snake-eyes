@@ -39,20 +39,21 @@ angular
   })
   .config(function($mdThemingProvider) {
     $mdThemingProvider.theme('error');
+    $mdThemingProvider.theme('splash');
   })
   .config(function(envServiceProvider) {
     // set the domains and variables for each environment
     envServiceProvider.config({
       domains: {
         development: ['localhost:9000'],
-        production: ['snakeeyes.stratumn.com', 'snakeeyes.stratumn.com.s3-eu-west-1.amazonaws.com']
+        production: ['snakeeyes.stratumn.com']
       },
       vars: {
         development: {
-          agentUrl: 'http://snake-eyes.lvh.me:3001'
+          agentUrl: 'http://%s.lvh.me:3001'
         },
         production: {
-          agentUrl: 'https://snake-eyes.stratumn.net'
+          agentUrl: 'https://%s.stratumn.net'
         }
       }
     });
