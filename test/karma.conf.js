@@ -34,6 +34,7 @@ module.exports = function(config) {
       'bower_components/bitcore-message/bitcore-message.min.js',
       'bower_components/babel-polyfill/browser-polyfill.js',
       'bower_components/stratumn-sdk/dist/stratumn-sdk.js',
+      'bower_components/angular-debounce/dist/angular-debounce.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

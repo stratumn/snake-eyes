@@ -9,17 +9,11 @@ function StratumnService(envService) {
   this.init = init;
   this.register = register;
   this.roll = roll;
-  this.chainscriptUrl = chainscriptUrl;
   this.mapId = null;
 
   StratumnSDK.config.applicationUrl = envService.read('agentUrl');
 
   var app = StratumnSDK.getApplication('snake-eyes');
-
-  var appUrl;
-   app.then(function(app) {
-     appUrl = app.url;
-   });
 
   var service = this;
 
@@ -60,11 +54,5 @@ function StratumnService(envService) {
         playerBranchTip = res;
         return res.link.state;
       });
-  }
-
-  function chainscriptUrl() {
-    if (service.mapId) {
-      return appUrl + '/maps/' + service.mapId;
-    }
   }
 }

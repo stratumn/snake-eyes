@@ -14,7 +14,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngMaterial',
-    'environment'
+    'environment',
+    'rt.debounce'
   ])
   .config(function ($routeProvider) {
     $routeProvider

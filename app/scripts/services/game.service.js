@@ -52,7 +52,6 @@ function GameService($mdToast, FirebaseService, StratumnService) {
   };
 
   this.roll = function() {
-
     var message = new Message(Date.now() + '');
     var signature = message.sign(privateKey);
 

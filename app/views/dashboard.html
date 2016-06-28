@@ -56,7 +56,8 @@
       </md-content>
 
     </div>
-    <md-button href="{{dashboard.chainscriptUrl()}}" target="_blank">View chainscript</md-button>
-    <map-explorer map-url="dashboard.chainscriptUrl()" refresh="dashboard.scores.length"></map-explorer>
+    <md-button href="{{dashboard.mapId}}" target="_blank">View chainscript</md-button>
+
+    <map-explorer application=" 'snake-eyes' " map-id="dashboard.mapId" refresh="dashboard.scores.length"></map-explorer>
   </div>
 </div>

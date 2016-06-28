@@ -8,7 +8,7 @@
   stroke-width: 1.5px;
 }
 
-.node text, .link text {
+.node text, .link text, .textpath {
   font: 10px sans-serif;
 }
 
@@ -16,4 +16,8 @@
   fill: none;
   stroke: #ccc;
   stroke-width: 1.5px;
+}
+
+.win circle {
+  fill: red;
 }
